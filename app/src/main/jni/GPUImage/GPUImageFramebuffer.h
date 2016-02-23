@@ -26,23 +26,28 @@ namespace e{
     public:
         GPUImageFramebuffer(void);
         GPUImageFramebuffer(Size size);
-        GPUImageFramebuffer(Size size, GPUImageTextureOptions textureOptions, bool onlyGenerateTexture);
         GPUImageFramebuffer(Size size, GLuint inputTexture);
+        GPUImageFramebuffer(Size size, GPUImageTextureOptions textureOptions, bool onlyGenerateTexture);
         virtual ~GPUImageFramebuffer(void);
 
         void GenerateFramebuffer(void);
         void GenerateTexture(void);
         void DestroyFramebuffer(void);
-
+        //usage
         void ActivateFramebuffer(void);
+        //Reference counting
         void Lock(void);
         void Unlock(void);
         void ClearAllLocks(void);
         void DisableReferenceCounting(void);
         void EnableReferenceCounting(void);
+
+        //image capture
+        void* NewCGImageFromFramebufferContents;
+        void RestoreRenderTarget(void);
+        //raw data
         void LockForReading(void)
         void UnlockAfterReading(void);
-
         int BytesPerRow(void);
         GLubyte* ByteBuffer(void);
     private:
@@ -52,7 +57,12 @@ namespace e{
         GPUTextureOptions _textureOptions;
         bool _missingFramebuffer;
         int _frameBufferReferenceCount;
-        bool _referenceCountingDisable;
+        bool _referenceCountingDisabled;
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+        //CVPixelBufferRef _renderTarget;
+        //CVOpenGLESTextureRef _renderTexture;
+        //int _readLockCount;
+#endif
     };
 
 }

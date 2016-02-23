@@ -12,6 +12,9 @@ namespace e{
     public:
         GPUImageContext(void);
         virtual ~GPUImageContext(void);
+        static bool SupportsFastTextureUpload(void);
+        static void UseImageProcessingContext(void);
+        static GPUImageFramebufferCache* SharedFramebufferCache(void);
     private:
 
     };

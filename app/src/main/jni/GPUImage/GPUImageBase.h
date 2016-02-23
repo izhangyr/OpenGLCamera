@@ -21,10 +21,28 @@ namespace e {
             this->cy = cy;
         }
 
-        Size(const Size & s)
+        Size(const Size & r)
         {
-            cx = s.cx;
-            cy = s.cy;
+            cx = r.cx;
+            cy = r.cy;
+        }
+    };
+
+    struct Point{
+        int x, y;
+        Point(void)
+        {
+            x = y = 0;
+        }
+        Point(int x, int y)
+        {
+            this->x = x;
+            this->y = y;
+        }
+        Point(const Point & r)
+        {
+            x = r.x;
+            y = r.y;
         }
     };
 

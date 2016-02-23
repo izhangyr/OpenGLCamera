@@ -16,4 +16,9 @@ namespace e{
 
     }
 
+    bool GPUImageContext::supportsFastTextureUpload(void)
+    {
+        return false;
+    }
+
 }
