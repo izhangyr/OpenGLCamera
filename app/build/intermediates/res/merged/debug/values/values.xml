@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_spinner_array">
+        <item>None</item>
+        <item>Little Whitening</item>
+        <item>Moderate Whitening</item>
+        <item>Little Pink</item>
+        <item>Moderate Pink</item>
+        <item>High Pink</item>
+        <item>Moderate Flesh</item>
+        <item>High Flesh</item>
+        <item>Classic HDR</item>
+        <item>Yellowing Dark Corners</item>
+        <item>Pink Lady</item>
+        <item>Ice Spirit</item>
+        <item>Night View</item>
+    </string-array>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">OpenGLCamera</string>
+    <string name="hello_world">Hello world!</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

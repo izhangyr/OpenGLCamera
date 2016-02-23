@@ -1,0 +1,108 @@
+install prefix            /home/liguoning/workspace/thirdpartylibrary/ffmpeg/build/master/armv7
+source path               .
+C compiler                arm-linux-androideabi-gcc
+ARCH                      arm (armv7-a)
+big-endian                no
+runtime cpu detection     yes
+ARMv5TE enabled           yes
+ARMv6 enabled             yes
+ARMv6T2 enabled           yes
+VFP enabled               yes
+NEON enabled              yes
+THUMB enabled             yes
+debug symbols             no
+strip symbols             yes
+optimize for size         no
+optimizations             yes
+static                    yes
+shared                    yes
+postprocessing support    yes
+new filter support        yes
+network support           yes
+threading support         pthreads
+safe bitstream reader     yes
+SDL support               no
+opencl enabled            no
+texi2html enabled         no
+perl enabled              yes
+pod2man enabled           yes
+makeinfo enabled          no
+
+External libraries:
+libfdk_aac		libx264			zlib
+librtmp
+
+Enabled decoders:
+adpcm_4xm		adpcm_sbpro_3		pcm_f64le
+adpcm_adx		adpcm_sbpro_4		pcm_lxf
+adpcm_afc		adpcm_swf		pcm_mulaw
+adpcm_ct		adpcm_thp		pcm_s16be
+adpcm_dtk		adpcm_xa		pcm_s16be_planar
+adpcm_ea		adpcm_yamaha		pcm_s16le
+adpcm_ea_maxis_xa	alac			pcm_s16le_planar
+adpcm_ea_r1		amrnb			pcm_s24be
+adpcm_ea_r2		amrwb			pcm_s24daud
+adpcm_ea_r3		ape			pcm_s24le
+adpcm_ea_xas		dca			pcm_s24le_planar
+adpcm_g722		dsd_lsbf		pcm_s32be
+adpcm_g726		dsd_lsbf_planar		pcm_s32le
+adpcm_ima_amv		dsd_msbf		pcm_s32le_planar
+adpcm_ima_apc		dsd_msbf_planar		pcm_s8
+adpcm_ima_dk3		flac			pcm_s8_planar
+adpcm_ima_dk4		h264			pcm_u16be
+adpcm_ima_ea_eacs	libfdk_aac		pcm_u16le
+adpcm_ima_ea_sead	mp2			pcm_u24be
+adpcm_ima_iss		mp3			pcm_u24le
+adpcm_ima_oki		nellymoser		pcm_u32be
+adpcm_ima_qt		pcm_alaw		pcm_u32le
+adpcm_ima_rad		pcm_bluray		pcm_u8
+adpcm_ima_smjpeg	pcm_dvd			pcm_zork
+adpcm_ima_wav		pcm_f32be		vorbis
+adpcm_ima_ws		pcm_f32le		wmav1
+adpcm_ms		pcm_f64be		wmav2
+adpcm_sbpro_2
+
+Enabled encoders:
+aac			libx264			pcm_alaw
+libfdk_aac
+
+Enabled hwaccels:
+
+Enabled parsers:
+aac			flac			vorbis
+dca			mpegaudio
+
+Enabled demuxers:
+aac			dts			mov
+aiff			flac			mp3
+amr			flv			mpegts
+ape			h264			ogg
+asf			hls			wav
+dsf
+
+Enabled muxers:
+flv			mov			wav
+ipod
+
+Enabled protocols:
+cache			httpproxy		librtmpt
+file			librtmp			librtmpte
+hls			librtmpe		tcp
+http			librtmps
+
+Enabled filters:
+aresample
+
+Enabled bsfs:
+mp3_header_compress	mp3_header_decompress
+
+Enabled indevs:
+
+Enabled outdevs:
+
+License: nonfree and unredistributable
+Creating config.mak, config.h, and doc/config.texi...
+libavutil/avconfig.h is unchanged
+
+WARNING: Option --enable-protocol=udps did not match anything
+WARNING: arm-linux-androideabi-pkg-config not found, library detection may fail.

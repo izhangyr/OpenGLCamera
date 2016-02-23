@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OpenGLCamera</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="filter_spinner_array">
+        <item>None</item>
+        <item>Little Whitening</item>
+        <item>Moderate Whitening</item>
+        <item>Little Pink</item>
+        <item>Moderate Pink</item>
+        <item>High Pink</item>
+        <item>Moderate Flesh</item>
+        <item>High Flesh</item>
+        <item>Classic HDR</item>
+        <item>Yellowing Dark Corners</item>
+        <item>Pink Lady</item>
+        <item>Ice Spirit</item>
+        <item>Night View</item>
+    </string-array>
+
+</resources>
