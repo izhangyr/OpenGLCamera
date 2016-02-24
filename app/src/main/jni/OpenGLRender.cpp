@@ -26,7 +26,7 @@ namespace KugouPlayer
 		}
 	}
 
-	void BGRA2RGBA(uint8 * des, uint8 * src, int width, int height)//24Î»bmpÊý¾ÝÊÇ°´BGRµÄË³Ðò´æ·Å,BÎªµÍ×Ö½Ú,RÎª¸ß×Ö½Ú
+	void BGRA2RGBA(uint8 * des, uint8 * src, int width, int height)//24ä½bmpæ•°æ®æ˜¯æŒ‰BGRçš„é¡ºåºå­˜æ”¾,Bä¸ºä½Žå­—èŠ‚,Rä¸ºé«˜å­—èŠ‚
 	{
 		for (int y = 0; y < height; y++)
 		{
@@ -67,30 +67,30 @@ namespace KugouPlayer
 	}
 
 	/*
-	 *×ÅÉ«Æ÷Óë×ÅÉ«ÓïÑÔ
-	×ÅÉ«ÓïÑÔÊÇÒ»ÖÖÀàCÓïÑÔ£¬µ«²»ÏñCÓïÑÔÒ»ÑùÖ§³ÖË«¾«¶È¸¡µãÐÍ(double)¡¢×Ö½ÚÐÍ(byte)¡¢¶ÌÕûÐÍ(short)¡¢³¤ÕûÐÍ(long)£¬²¢ÇÒÈ¡ÏûÁËCÖÐµÄÁªºÏÌå(union)¡¢Ã¶¾ÙÀàÐÍ(enum)¡¢ÎÞ·ûºÅÊý(unsigned)ÒÔ¼°Î»ÔËËãµÈÌØÐÔ¡£
-	×ÅÉ«ÓïÑÔÖÐÓÐÐí¶àÄÚ½¨µÄÔ­ÉúÊý¾ÝÀàÐÍÒÔ¼°¹¹½¨Êý¾ÝÀàÐÍ£¬Èç£º¸¡µãÐÍ(float)¡¢²¼¶ûÐÍ(bool)¡¢ÕûÐÍ(int)¡¢¾ØÕóÐÍ(matrix)ÒÔ¼°ÏòÁ¿ÐÍ(vec2¡¢vec3µÈ)µÈ¡£×ÜÌåÀ´Ëµ£¬ÕâÐ©Êý¾ÝÀàÐÍ¿ÉÒÔ·ÖÎª±êÁ¿¡¢ÏòÁ¿¡¢¾ØÕó¡¢²ÉÑùÆ÷¡¢½á¹¹ÌåÒÔ¼°Êý×éµÈ¡£
-	shaderÖ§³ÖÏÂÃæÊý¾ÝÀàÐÍ£º
+	 *ç€è‰²å™¨ä¸Žç€è‰²è¯­è¨€
+	ç€è‰²è¯­è¨€æ˜¯ä¸€ç§ç±»Cè¯­è¨€ï¼Œä½†ä¸åƒCè¯­è¨€ä¸€æ ·æ”¯æŒåŒç²¾åº¦æµ®ç‚¹åž‹(double)ã€å­—èŠ‚åž‹(byte)ã€çŸ­æ•´åž‹(short)ã€é•¿æ•´åž‹(long)ï¼Œå¹¶ä¸”å–æ¶ˆäº†Cä¸­çš„è”åˆä½“(union)ã€æžšä¸¾ç±»åž‹(enum)ã€æ— ç¬¦å·æ•°(unsigned)ä»¥åŠä½è¿ç®—ç­‰ç‰¹æ€§ã€‚
+	ç€è‰²è¯­è¨€ä¸­æœ‰è®¸å¤šå†…å»ºçš„åŽŸç”Ÿæ•°æ®ç±»åž‹ä»¥åŠæž„å»ºæ•°æ®ç±»åž‹ï¼Œå¦‚ï¼šæµ®ç‚¹åž‹(float)ã€å¸ƒå°”åž‹(bool)ã€æ•´åž‹(int)ã€çŸ©é˜µåž‹(matrix)ä»¥åŠå‘é‡åž‹(vec2ã€vec3ç­‰)ç­‰ã€‚æ€»ä½“æ¥è¯´ï¼Œè¿™äº›æ•°æ®ç±»åž‹å¯ä»¥åˆ†ä¸ºæ ‡é‡ã€å‘é‡ã€çŸ©é˜µã€é‡‡æ ·å™¨ã€ç»“æž„ä½“ä»¥åŠæ•°ç»„ç­‰ã€‚
+	shaderæ”¯æŒä¸‹é¢æ•°æ®ç±»åž‹ï¼š
 	Float  bool  int
-	vec2           °üº¬ÁË2¸ö¸¡µãÊýµÄÏòÁ¿     vec3          °üº¬ÁË3¸ö¸¡µãÊýµÄÏòÁ¿     vec4         °üº¬ÁË4¸ö¸¡µãÊýµÄÏòÁ¿
-	ivec2          °üº¬ÁË2¸öÕûÊýµÄÏòÁ¿         ivec3       °üº¬ÁË3¸öÕûÊýµÄÏòÁ¿      ivec4       °üº¬ÁË4¸öÕûÊýµÄÏòÁ¿
-	bvec2          °üº¬ÁË2¸ö²¼¶ûÊýµÄÏòÁ¿    bvec3        °üº¬ÁË3¸ö²¼¶ûÊýµÄÏòÁ¿   bvec4       °üº¬ÁË4¸ö²¼¶ûÊýµÄÏòÁ¿
-	mat2    2*2Î¬¾ØÕó                           mat3   3*3Î¬¾ØÕó                          mat4    4*4Î¬¾ØÕó
-    sampler1D   1DÎÆÀí×ÅÉ«Æ÷          sampler2D    2DÎÆÀí×ÅÉ«Æ÷
-	sampler3D   3DÎÆÀí×ÅÉ«Æ÷
+	vec2           åŒ…å«äº†2ä¸ªæµ®ç‚¹æ•°çš„å‘é‡     vec3          åŒ…å«äº†3ä¸ªæµ®ç‚¹æ•°çš„å‘é‡     vec4         åŒ…å«äº†4ä¸ªæµ®ç‚¹æ•°çš„å‘é‡
+	ivec2          åŒ…å«äº†2ä¸ªæ•´æ•°çš„å‘é‡         ivec3       åŒ…å«äº†3ä¸ªæ•´æ•°çš„å‘é‡      ivec4       åŒ…å«äº†4ä¸ªæ•´æ•°çš„å‘é‡
+	bvec2          åŒ…å«äº†2ä¸ªå¸ƒå°”æ•°çš„å‘é‡    bvec3        åŒ…å«äº†3ä¸ªå¸ƒå°”æ•°çš„å‘é‡   bvec4       åŒ…å«äº†4ä¸ªå¸ƒå°”æ•°çš„å‘é‡
+	mat2    2*2ç»´çŸ©é˜µ                           mat3   3*3ç»´çŸ©é˜µ                          mat4    4*4ç»´çŸ©é˜µ
+    sampler1D   1Dçº¹ç†ç€è‰²å™¨          sampler2D    2Dçº¹ç†ç€è‰²å™¨
+	sampler3D   3Dçº¹ç†ç€è‰²å™¨
 
-	OpenGL ES2.0µÄshaderÀïÃæÉùÃ÷µÄ±äÁ¿Ò»°ãÓÐÈýÖÖÀàÐÍuniform, attribute, varying¡£
-	1.uniform±äÁ¿
-	uniform±äÁ¿ÊÇÍâ²¿application³ÌÐò´«µÝ¸ø£¨vertexºÍfragment£©shaderµÄ±äÁ¿¡£Òò´ËËüÊÇ applicationÍ¨¹ýº¯ÊýglUniform**£¨£©º¯Êý¸³ÖµµÄ¡£ÔÚ£¨vertexºÍfragment£©shader³ÌÐòÄÚ²¿£¬uniform±äÁ¿ ¾ÍÏñÊÇCÓïÑÔÀïÃæµÄ³£Á¿£¨const £©£¬Ëü²»ÄÜ±»shader³ÌÐòÐÞ¸Ä¡££¨shaderÖ»ÄÜÓÃ£¬²»ÄÜ¸Ä£©
-	Èç¹ûuniform±äÁ¿ÔÚvertexºÍfragmentÁ½ÕßÖ®¼äÉùÃ÷·½Ê½ÍêÈ«Ò»Ñù£¬ÔòËü¿ÉÒÔÔÚvertexºÍfragment¹²ÏíÊ¹ÓÃ¡££¨Ïàµ±ÓÚÒ»¸ö±»vertexºÍfragment shader¹²ÏíµÄÈ«¾Ö±äÁ¿£©
-	uniform±äÁ¿Ò»°ãÓÃÀ´±íÊ¾£º±ä»»¾ØÕó£¬²ÄÖÊ£¬¹âÕÕ²ÎÊýºÍÑÕÉ«µÈÐÅÏ¢¡£
-	2.attribute±äÁ¿
-	attribute±äÁ¿ÊÇÖ»ÄÜÔÚvertex shaderÖÐÊ¹ÓÃµÄ±äÁ¿¡££¨Ëü²»ÄÜÔÚfragment shaderÖÐÉùÃ÷attribute±äÁ¿£¬Ò²²»ÄÜ±»fragment shaderÖÐÊ¹ÓÃ£©
-	Ò»°ãÓÃattribute±äÁ¿À´±íÊ¾Ò»Ð©¶¥µãµÄÊý¾Ý£¬Èç£º¶¥µã×ø±ê£¬·¨Ïß£¬ÎÆÀí×ø±ê£¬¶¥µãÑÕÉ«µÈ¡£
-	ÔÚapplicationÖÐ£¬Ò»°ãÓÃº¯ÊýglBindAttribLocation£¨£©À´°ó¶¨Ã¿¸öattribute±äÁ¿µÄÎ»ÖÃ£¬È»ºóÓÃº¯ÊýglVertexAttribPointer£¨£©ÎªÃ¿¸öattribute±äÁ¿¸³Öµ¡£
-	3.varying±äÁ¿
-	varying±äÁ¿ÊÇvertexºÍfragment shaderÖ®¼ä×öÊý¾Ý´«µÝÓÃµÄ¡£Ò»°ãvertex shaderÐÞ¸Ävarying±äÁ¿µÄÖµ£¬È»ºófragment shaderÊ¹ÓÃ¸Ãvarying±äÁ¿µÄÖµ¡£Òò´Ëvarying±äÁ¿ÔÚvertexºÍfragment shader¶þÕßÖ®¼äµÄÉùÃ÷±ØÐëÊÇÒ»ÖÂµÄ¡£
-	application²»ÄÜÊ¹ÓÃ´Ë±äÁ¿¡£
+	OpenGL ES2.0çš„shaderé‡Œé¢å£°æ˜Žçš„å˜é‡ä¸€èˆ¬æœ‰ä¸‰ç§ç±»åž‹uniform, attribute, varyingã€‚
+	1.uniformå˜é‡
+	uniformå˜é‡æ˜¯å¤–éƒ¨applicationç¨‹åºä¼ é€’ç»™ï¼ˆvertexå’Œfragmentï¼‰shaderçš„å˜é‡ã€‚å› æ­¤å®ƒæ˜¯ applicationé€šè¿‡å‡½æ•°glUniform**ï¼ˆï¼‰å‡½æ•°èµ‹å€¼çš„ã€‚åœ¨ï¼ˆvertexå’Œfragmentï¼‰shaderç¨‹åºå†…éƒ¨ï¼Œuniformå˜é‡ å°±åƒæ˜¯Cè¯­è¨€é‡Œé¢çš„å¸¸é‡ï¼ˆconst ï¼‰ï¼Œå®ƒä¸èƒ½è¢«shaderç¨‹åºä¿®æ”¹ã€‚ï¼ˆshaderåªèƒ½ç”¨ï¼Œä¸èƒ½æ”¹ï¼‰
+	å¦‚æžœuniformå˜é‡åœ¨vertexå’Œfragmentä¸¤è€…ä¹‹é—´å£°æ˜Žæ–¹å¼å®Œå…¨ä¸€æ ·ï¼Œåˆ™å®ƒå¯ä»¥åœ¨vertexå’Œfragmentå…±äº«ä½¿ç”¨ã€‚ï¼ˆç›¸å½“äºŽä¸€ä¸ªè¢«vertexå’Œfragment shaderå…±äº«çš„å…¨å±€å˜é‡ï¼‰
+	uniformå˜é‡ä¸€èˆ¬ç”¨æ¥è¡¨ç¤ºï¼šå˜æ¢çŸ©é˜µï¼Œæè´¨ï¼Œå…‰ç…§å‚æ•°å’Œé¢œè‰²ç­‰ä¿¡æ¯ã€‚
+	2.attributeå˜é‡
+	attributeå˜é‡æ˜¯åªèƒ½åœ¨vertex shaderä¸­ä½¿ç”¨çš„å˜é‡ã€‚ï¼ˆå®ƒä¸èƒ½åœ¨fragment shaderä¸­å£°æ˜Žattributeå˜é‡ï¼Œä¹Ÿä¸èƒ½è¢«fragment shaderä¸­ä½¿ç”¨ï¼‰
+	ä¸€èˆ¬ç”¨attributeå˜é‡æ¥è¡¨ç¤ºä¸€äº›é¡¶ç‚¹çš„æ•°æ®ï¼Œå¦‚ï¼šé¡¶ç‚¹åæ ‡ï¼Œæ³•çº¿ï¼Œçº¹ç†åæ ‡ï¼Œé¡¶ç‚¹é¢œè‰²ç­‰ã€‚
+	åœ¨applicationä¸­ï¼Œä¸€èˆ¬ç”¨å‡½æ•°glBindAttribLocationï¼ˆï¼‰æ¥ç»‘å®šæ¯ä¸ªattributeå˜é‡çš„ä½ç½®ï¼Œç„¶åŽç”¨å‡½æ•°glVertexAttribPointerï¼ˆï¼‰ä¸ºæ¯ä¸ªattributeå˜é‡èµ‹å€¼ã€‚
+	3.varyingå˜é‡
+	varyingå˜é‡æ˜¯vertexå’Œfragment shaderä¹‹é—´åšæ•°æ®ä¼ é€’ç”¨çš„ã€‚ä¸€èˆ¬vertex shaderä¿®æ”¹varyingå˜é‡çš„å€¼ï¼Œç„¶åŽfragment shaderä½¿ç”¨è¯¥varyingå˜é‡çš„å€¼ã€‚å› æ­¤varyingå˜é‡åœ¨vertexå’Œfragment shaderäºŒè€…ä¹‹é—´çš„å£°æ˜Žå¿…é¡»æ˜¯ä¸€è‡´çš„ã€‚
+	applicationä¸èƒ½ä½¿ç”¨æ­¤å˜é‡ã€‚
 	 */
 	const char* OpenGLRender::VERTEX_SHADER_STRING =
 		"attribute vec4 position;"
@@ -216,7 +216,7 @@ namespace KugouPlayer
 		};
 
 	/*
-	 * OpenGLRenderÀàµÄ¹¹Ôìº¯ÊýÖÐ³õÊ¼»¯Æä³ÉÔ±±äÁ¿
+	 * OpenGLRenderç±»çš„æž„é€ å‡½æ•°ä¸­åˆå§‹åŒ–å…¶æˆå‘˜å˜é‡
 	 */
 	OpenGLRender::OpenGLRender()
 		: mGaussFilterFlag( false ),
@@ -233,10 +233,10 @@ namespace KugouPlayer
 		  width( 0 ),
 		  height( 0 )
 	{
-		//½«Õý³£µÄÃ»ÓÐ¾­¹ý½Ç¶ÈÐý×ªµÄ¶¥µã×ø±êÖµ¿½±´µ½coordVerticesÖÐ
+		//å°†æ­£å¸¸çš„æ²¡æœ‰ç»è¿‡è§’åº¦æ—‹è½¬çš„é¡¶ç‚¹åæ ‡å€¼æ‹·è´åˆ°coordVerticesä¸­
 		memcpy( coordVertices, TEXTURE_ROTATED[ 0 ], sizeof( coordVertices ) );
 
-		int err = _LoadShader();//¼ÓÔØ×ÅÉ«Æ÷
+		int err = _LoadShader();//åŠ è½½ç€è‰²å™¨
 		if( err < 0 )
 		{
 			LOGE( "openGL load shaders failed! err:%d\n", err );
@@ -247,14 +247,14 @@ namespace KugouPlayer
 		}
 
 		/*
-		 * Ê¹ÓÃglUseProgram()½«OpenGLäÖÈ¾¹ÜµÀÇÐ»»µ½×ÅÉ«Æ÷Ä£Ê½£¬²¢Ê¹ÓÃ¸Õ²Å×öºÃµÄ£¨×ÅÉ«£©³ÌÐò¶ÔÏó¡£È»ºó£¬²Å¿ÉÒÔÌá½»¶¥µã¡£
+		 * ä½¿ç”¨glUseProgram()å°†OpenGLæ¸²æŸ“ç®¡é“åˆ‡æ¢åˆ°ç€è‰²å™¨æ¨¡å¼ï¼Œå¹¶ä½¿ç”¨åˆšæ‰åšå¥½çš„ï¼ˆç€è‰²ï¼‰ç¨‹åºå¯¹è±¡ã€‚ç„¶åŽï¼Œæ‰å¯ä»¥æäº¤é¡¶ç‚¹ã€‚
 		 */
 		glUseProgram( program );
 
 		/*
-		 * glGenTexturesº¯Êý¸ù¾ÝÎÆÀí²ÎÊý·µ»Øn¸öÎÆÀíË÷Òý£¬ÎÆÀíÃû³Æ¼¯ºÏ²»±ØÊÇÒ»¸öÁ¬ÐøµÄÕûÊý¼¯ºÏ
-		 * glGenTextures¾ÍÊÇÓÃÀ´²úÉúÄãÒª²Ù×÷µÄÎÆÀí¶ÔÏóµÄË÷ÒýµÄ£¬±ÈÈçÄã¸æËßOpenGL£¬ÎÒÐèÒª5¸öÎÆÀí¶ÔÏó£¬Ëü»á´ÓÃ»ÓÐÓÃµ½µÄÕûÊýÀï·µ»Ø5¸ö¸øÄã¡£
-		 * ÏÂÃæµÄµ÷ÓÃÊÇÐèÒª1¸öÎÆÀí¶ÔÏó,È»ºó½«Õâ¸öÎÆÀíË÷ÒýÖµ·ÅÔÚtextureIdÖÐ
+		 * glGenTextureså‡½æ•°æ ¹æ®çº¹ç†å‚æ•°è¿”å›žnä¸ªçº¹ç†ç´¢å¼•ï¼Œçº¹ç†åç§°é›†åˆä¸å¿…æ˜¯ä¸€ä¸ªè¿žç»­çš„æ•´æ•°é›†åˆ
+		 * glGenTextureså°±æ˜¯ç”¨æ¥äº§ç”Ÿä½ è¦æ“ä½œçš„çº¹ç†å¯¹è±¡çš„ç´¢å¼•çš„ï¼Œæ¯”å¦‚ä½ å‘Šè¯‰OpenGLï¼Œæˆ‘éœ€è¦5ä¸ªçº¹ç†å¯¹è±¡ï¼Œå®ƒä¼šä»Žæ²¡æœ‰ç”¨åˆ°çš„æ•´æ•°é‡Œè¿”å›ž5ä¸ªç»™ä½ ã€‚
+		 * ä¸‹é¢çš„è°ƒç”¨æ˜¯éœ€è¦1ä¸ªçº¹ç†å¯¹è±¡,ç„¶åŽå°†è¿™ä¸ªçº¹ç†ç´¢å¼•å€¼æ”¾åœ¨textureIdä¸­
 		 */
 		glGenTextures( 1, &textureId );
 	}
@@ -275,7 +275,7 @@ namespace KugouPlayer
 	void OpenGLRender::setRotation( int degrees, int flipHorizontal, int flipVertical )
 	{
 		/*
-		 * ¸ù¾ÝÐý×ª¶ÈÊýÉèÖÃ²»Í¬µÄÐý×ª¸¡µãÊýÖµ
+		 * æ ¹æ®æ—‹è½¬åº¦æ•°è®¾ç½®ä¸åŒçš„æ—‹è½¬æµ®ç‚¹æ•°å€¼
 		 */
 		float rotatedTex[ 8 ];
 		if( degrees == 90 )
@@ -310,7 +310,7 @@ namespace KugouPlayer
 			rotatedTex[ 7 ] = flip( rotatedTex[ 7 ] );
 		}
 
-		//¶ÔÓ¦µÄÐý×ª½Ç¶È¸¡µãÊýÖµÔÚäÖÈ¾º¯ÊýÖÐrenderÖÐ»á±»Êµ¼ÊÊ¹ÓÃµ½
+		//å¯¹åº”çš„æ—‹è½¬è§’åº¦æµ®ç‚¹æ•°å€¼åœ¨æ¸²æŸ“å‡½æ•°ä¸­renderä¸­ä¼šè¢«å®žé™…ä½¿ç”¨åˆ°
 		memcpy( coordVertices, rotatedTex, sizeof( coordVertices ) );
 
 		LOGE( "setRotation degrees:%d, flip:%d %d\n", degrees, flipHorizontal, flipVertical );
@@ -333,12 +333,12 @@ namespace KugouPlayer
 		_RegenTextures();
 
 		/*
-		 * glViewportÖ÷ÒªÍê³ÉÕâÑùµÄ¹¦ÄÜ¡£Ëü¸ºÔð°ÑÊÓ¾°Ìå½ØÈ¡µÄÍ¼Ïñ°´ÕÕÔõÑùµÄ¸ßºÍ¿íÏÔÊ¾µ½ÆÁÄ»ÉÏ¡£
+		 * glViewportä¸»è¦å®Œæˆè¿™æ ·çš„åŠŸèƒ½ã€‚å®ƒè´Ÿè´£æŠŠè§†æ™¯ä½“æˆªå–çš„å›¾åƒæŒ‰ç…§æ€Žæ ·çš„é«˜å’Œå®½æ˜¾ç¤ºåˆ°å±å¹•ä¸Šã€‚
 		 */
 		glViewport( this->x, this->y, this->width, this->height );
-		//Ö¸¶¨ÑÕÉ«»º³åÇøµÄÇåÀíÖµ
+		//æŒ‡å®šé¢œè‰²ç¼“å†²åŒºçš„æ¸…ç†å€¼
 		glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
-		//´«Èë»º³å±êÖ¾Î»£¬±íÃ÷ÐèÒªÇå³ýµÄ»º³å
+		//ä¼ å…¥ç¼“å†²æ ‡å¿—ä½ï¼Œè¡¨æ˜Žéœ€è¦æ¸…é™¤çš„ç¼“å†²
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//LOGE("x=%d y=%d width=%d height=%d widthTexture=%d heightTexture=%d\r\n", x, y, this->width, this->height, widthTexture, heightTexture);
@@ -347,7 +347,7 @@ namespace KugouPlayer
 		{
 			//rgbbuffer = new unsigned char[imageSize];
 
-			//°ó¶¨Ö®Ç°Éú³ÉµÄÎÆÀí¶ÔÏóË÷ÒýÖµ
+			//ç»‘å®šä¹‹å‰ç”Ÿæˆçš„çº¹ç†å¯¹è±¡ç´¢å¼•å€¼
 			glBindTexture( GL_TEXTURE_2D, textureId );
 
 
@@ -355,12 +355,12 @@ namespace KugouPlayer
 
 
 			/*
-			        ÎÆÀí¹ýÂËº¯ÊýglTexParameteri()
-			         Í¼Ïó´ÓÎÆÀíÍ¼Ïó¿Õ¼äÓ³Éäµ½Ö¡»º³åÍ¼Ïó¿Õ¼ä(Ó³ÉäÐèÒªÖØÐÂ¹¹ÔìÎÆÀíÍ¼Ïñ,ÕâÑù¾Í»áÔì³ÉÓ¦ÓÃµ½¶à±ßÐÎÉÏµÄÍ¼ÏñÊ§Õæ),ÕâÊ±¾Í¿ÉÓÃglTexParmeteri()º¯ÊýÀ´È·¶¨ÈçºÎ°ÑÎÆÀíÏóËØÓ³Éä³ÉÏñËØ.
-			   GL_TEXTURE_WRAP_S: S·½ÏòÉÏµÄÌùÍ¼Ä£Ê½  GL_TEXTURE_WRAP_T:T·½ÏòÉÏµÄÌùÍ¼Ä£Ê½.
-			   GL_TEXTURE_MAG_FILTER: ·Å´ó¹ýÂË   GL_TEXTURE_MIN_FILTER: ËõÐ¡¹ýÂË
-			   GL_LINEAR: ÏßÐÔ¹ýÂË, Ê¹ÓÃ¾àÀëµ±Ç°äÖÈ¾ÏñËØÖÐÐÄ×î½üµÄ4¸öÎÆËØ¼ÓÈ¨Æ½¾ùÖµ.
-			   GL_NEAREST:¶Ô×î½Ó½üµ±Ç°¶à±ßÐÎµÄ½âÎö¶ÈµÄÁ½¸ö²ã¼¶ÌùÍ¼½øÐÐ²ÉÑù,È»ºóÓÃÕâÁ½¸öÖµ½øÐÐÏßÐÔ²åÖµ.
+			        çº¹ç†è¿‡æ»¤å‡½æ•°glTexParameteri()
+			         å›¾è±¡ä»Žçº¹ç†å›¾è±¡ç©ºé—´æ˜ å°„åˆ°å¸§ç¼“å†²å›¾è±¡ç©ºé—´(æ˜ å°„éœ€è¦é‡æ–°æž„é€ çº¹ç†å›¾åƒ,è¿™æ ·å°±ä¼šé€ æˆåº”ç”¨åˆ°å¤šè¾¹å½¢ä¸Šçš„å›¾åƒå¤±çœŸ),è¿™æ—¶å°±å¯ç”¨glTexParmeteri()å‡½æ•°æ¥ç¡®å®šå¦‚ä½•æŠŠçº¹ç†è±¡ç´ æ˜ å°„æˆåƒç´ .
+			   GL_TEXTURE_WRAP_S: Sæ–¹å‘ä¸Šçš„è´´å›¾æ¨¡å¼  GL_TEXTURE_WRAP_T:Tæ–¹å‘ä¸Šçš„è´´å›¾æ¨¡å¼.
+			   GL_TEXTURE_MAG_FILTER: æ”¾å¤§è¿‡æ»¤   GL_TEXTURE_MIN_FILTER: ç¼©å°è¿‡æ»¤
+			   GL_LINEAR: çº¿æ€§è¿‡æ»¤, ä½¿ç”¨è·ç¦»å½“å‰æ¸²æŸ“åƒç´ ä¸­å¿ƒæœ€è¿‘çš„4ä¸ªçº¹ç´ åŠ æƒå¹³å‡å€¼.
+			   GL_NEAREST:å¯¹æœ€æŽ¥è¿‘å½“å‰å¤šè¾¹å½¢çš„è§£æžåº¦çš„ä¸¤ä¸ªå±‚çº§è´´å›¾è¿›è¡Œé‡‡æ ·,ç„¶åŽç”¨è¿™ä¸¤ä¸ªå€¼è¿›è¡Œçº¿æ€§æ’å€¼.
 			 */
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
@@ -368,27 +368,27 @@ namespace KugouPlayer
 			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
 			/*
-			 *Ê¹ÓÃglVertexAttribPointer±íÊ¾ÔÚÓ¦ÓÃ³ÌÐòÖÐÎª¶¥µã×ÅÉ«Æ÷ÓïÑÔÖÐµÄattributeÀàÐÍµÄ±äÁ¿¸³Öµ
-			 *µÚÒ»¸ö²ÎÊýindex:Ö¸¶¨ÒªÐÞ¸ÄµÄ¶¥µãÊôÐÔµÄË÷ÒýÖµ  µÚ¶þ¸ö²ÎÊý£ºÖ¸¶¨Ã¿¸ö¶¥µãÊôÐÔµÄ×é¼þÊýÁ¿(Ò»¸ö¶¥µãÓÉ¶àÉÙ¸öÖµ×é³É)¡£±ØÐëÎª1¡¢2¡¢3»òÕß4¡£³õÊ¼ÖµÎª4¡££¨ÃÎÎ¬£ºÈçpositionÊÇÓÉ3¸ö£¨x,y,z£©×é³É£¬¶øÑÕÉ«ÊÇ4¸ö£¨r,g,b,a£©£©
-			 *µÚÈý¸ö²ÎÊýtype:Ö¸¶¨Êý×éÖÐÃ¿¸ö×é¼þµÄÊý¾ÝÀàÐÍ¡£¿ÉÓÃµÄ·ûºÅ³£Á¿ÓÐGL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT,GL_UNSIGNED_SHORT, GL_FIXED, ºÍ GL_FLOAT£¬³õÊ¼ÖµÎªGL_FLOAT¡£
-			 *µÚËÄ¸ö²ÎÊýnormalized:Ö¸¶¨µ±±»·ÃÎÊÊ±£¬¹Ì¶¨µãÊý¾ÝÖµÊÇ·ñÓ¦¸Ã±»¹éÒ»»¯£¨GL_TRUE£©»òÕßÖ±½Ó×ª»»Îª¹Ì¶¨µãÖµ£¨GL_FALSE£©
-			    µÚÎå¸ö²ÎÊý:stride Ö¸¶¨Á¬Ðø¶¥µãÊôÐÔÖ®¼äµÄÆ«ÒÆÁ¿¡£Èç¹ûÎª0£¬ÄÇÃ´¶¥µãÊôÐÔ»á±»Àí½âÎª£ºËüÃÇÊÇ½ôÃÜÅÅÁÐÔÚÒ»ÆðµÄ¡£³õÊ¼ÖµÎª0¡£
-			   µÚÁù¸ö²ÎÊý:pointer Ö¸¶¨Ò»¸öÖ¸Õë£¬Ö¸ÏòÊý×éÖÐµÚÒ»¸ö¶¥µãÊôÐÔµÄµÚÒ»¸ö×é¼þ¡£³õÊ¼ÖµÎª0¡£
+			 *ä½¿ç”¨glVertexAttribPointerè¡¨ç¤ºåœ¨åº”ç”¨ç¨‹åºä¸­ä¸ºé¡¶ç‚¹ç€è‰²å™¨è¯­è¨€ä¸­çš„attributeç±»åž‹çš„å˜é‡èµ‹å€¼
+			 *ç¬¬ä¸€ä¸ªå‚æ•°index:æŒ‡å®šè¦ä¿®æ”¹çš„é¡¶ç‚¹å±žæ€§çš„ç´¢å¼•å€¼  ç¬¬äºŒä¸ªå‚æ•°ï¼šæŒ‡å®šæ¯ä¸ªé¡¶ç‚¹å±žæ€§çš„ç»„ä»¶æ•°é‡(ä¸€ä¸ªé¡¶ç‚¹ç”±å¤šå°‘ä¸ªå€¼ç»„æˆ)ã€‚å¿…é¡»ä¸º1ã€2ã€3æˆ–è€…4ã€‚åˆå§‹å€¼ä¸º4ã€‚ï¼ˆæ¢¦ç»´ï¼šå¦‚positionæ˜¯ç”±3ä¸ªï¼ˆx,y,zï¼‰ç»„æˆï¼Œè€Œé¢œè‰²æ˜¯4ä¸ªï¼ˆr,g,b,aï¼‰ï¼‰
+			 *ç¬¬ä¸‰ä¸ªå‚æ•°type:æŒ‡å®šæ•°ç»„ä¸­æ¯ä¸ªç»„ä»¶çš„æ•°æ®ç±»åž‹ã€‚å¯ç”¨çš„ç¬¦å·å¸¸é‡æœ‰GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT,GL_UNSIGNED_SHORT, GL_FIXED, å’Œ GL_FLOATï¼Œåˆå§‹å€¼ä¸ºGL_FLOATã€‚
+			 *ç¬¬å››ä¸ªå‚æ•°normalized:æŒ‡å®šå½“è¢«è®¿é—®æ—¶ï¼Œå›ºå®šç‚¹æ•°æ®å€¼æ˜¯å¦åº”è¯¥è¢«å½’ä¸€åŒ–ï¼ˆGL_TRUEï¼‰æˆ–è€…ç›´æŽ¥è½¬æ¢ä¸ºå›ºå®šç‚¹å€¼ï¼ˆGL_FALSEï¼‰
+			    ç¬¬äº”ä¸ªå‚æ•°:stride æŒ‡å®šè¿žç»­é¡¶ç‚¹å±žæ€§ä¹‹é—´çš„åç§»é‡ã€‚å¦‚æžœä¸º0ï¼Œé‚£ä¹ˆé¡¶ç‚¹å±žæ€§ä¼šè¢«ç†è§£ä¸ºï¼šå®ƒä»¬æ˜¯ç´§å¯†æŽ’åˆ—åœ¨ä¸€èµ·çš„ã€‚åˆå§‹å€¼ä¸º0ã€‚
+			   ç¬¬å…­ä¸ªå‚æ•°:pointer æŒ‡å®šä¸€ä¸ªæŒ‡é’ˆï¼ŒæŒ‡å‘æ•°ç»„ä¸­ç¬¬ä¸€ä¸ªé¡¶ç‚¹å±žæ€§çš„ç¬¬ä¸€ä¸ªç»„ä»¶ã€‚åˆå§‹å€¼ä¸º0ã€‚
 			 */
 			glVertexAttribPointer( ATTRIBUTE_VERTEX, 2, GL_FLOAT, 0, 0, squardVertices );
 			/*
-			 * ÒªÆôÓÃ»òÕß½ûÓÃ¶¥µãÊôÐÔÊý×é£¬µ÷ÓÃglEnableVertexAttribArrayºÍglDisableVertexAttribArray´«Èë²ÎÊýindex¡£Èç¹ûÆôÓÃ£¬ÄÇÃ´µ±glDrawArrays»òÕßglDrawElements±»µ÷ÓÃÊ±£¬¶¥µãÊôÐÔÊý×é»á±»Ê¹ÓÃ¡£
+			 * è¦å¯ç”¨æˆ–è€…ç¦ç”¨é¡¶ç‚¹å±žæ€§æ•°ç»„ï¼Œè°ƒç”¨glEnableVertexAttribArrayå’ŒglDisableVertexAttribArrayä¼ å…¥å‚æ•°indexã€‚å¦‚æžœå¯ç”¨ï¼Œé‚£ä¹ˆå½“glDrawArraysæˆ–è€…glDrawElementsè¢«è°ƒç”¨æ—¶ï¼Œé¡¶ç‚¹å±žæ€§æ•°ç»„ä¼šè¢«ä½¿ç”¨ã€‚
 			 */
 			glEnableVertexAttribArray( ATTRIBUTE_VERTEX );
 
 			glVertexAttribPointer( ATTRIBUTE_TEXCOORD, 2, GL_FLOAT, 0, 0, coordVertices );
 			glEnableVertexAttribArray( ATTRIBUTE_TEXCOORD );
 
-			glActiveTexture( GL_TEXTURE0 );//¼¤»îÎÆÀí
+			glActiveTexture( GL_TEXTURE0 );//æ¿€æ´»çº¹ç†
 			glBindTexture( GL_TEXTURE_2D, textureId );
 
-			//ÎªÖ®Ç°°ó¶¨µÄÆ¬¶Î×ÅÉ«Æ÷ÓïÑÔµÄuniformÀàÐÍµÄ±äÁ¿½øÐÐ¸³Öµ
-			glUniform1i( texture, 0 );//Ö»ÄÜ´«0,ÆäËüÖµÔòÊÇºÚÆÁ
+			//ä¸ºä¹‹å‰ç»‘å®šçš„ç‰‡æ®µç€è‰²å™¨è¯­è¨€çš„uniformç±»åž‹çš„å˜é‡è¿›è¡Œèµ‹å€¼
+			glUniform1i( texture, 0 );//åªèƒ½ä¼ 0,å…¶å®ƒå€¼åˆ™æ˜¯é»‘å±
 
 			glUniform2f( texturesize, ( GLfloat )widthTexture, ( GLfloat )heightTexture );
 
@@ -399,27 +399,27 @@ namespace KugouPlayer
 			}
 
 			/*
-			 ¸ù¾ÝÖ¸¶¨µÄ²ÎÊý£¬Éú³ÉÒ»¸ö2DÎÆÀí(Texture)
-			 µÚÒ»¸ö²ÎÊýÖ¸¶¨Ä¿±êÎÆÀí£¬Õâ¸öÖµ±ØÐëÊÇGL_TEXTURE_2D,µÚ¶þ¸ö²ÎÊýlevelÖ´ÐÐÏ¸½Ú¼¶±ð£¬0ÊÇ×î»ù±¾µÄÍ¼Ïñ¼¶±ð,n±íÊ¾µÚN¼¶ÌùÍ¼Ï¸»¯¼¶±ð
-			 µÚÈý¸ö²ÎÊýinternalformat Ö¸¶¨ÎÆÀíÖÐµÄÑÕÉ«×é¼þ£¬Õâ¸öÈ¡ÖµºÍºóÃæµÄformatÈ¡Öµ±ØÐëÏàÍ¬¡£¿ÉÑ¡µÄÖµÓÐGL_ALPHA,GL_RGB,GL_RGBA,GL_LUMINANCE, GL_LUMINANCE_ALPHA µÈ¼¸ÖÖ¡£
-			µÚËÄ¸ö²ÎÊýwidth Ö¸¶¨ÎÆÀíÍ¼ÏñµÄ¿í¶È£¬µÚÎå¸ö²ÎÊýheight Ö¸¶¨ÎÆÀíÍ¼ÏñµÄ¸ß¶È£¬µÚÁù¸ö²ÎÊýborder Ö¸¶¨±ß¿òµÄ¿í¶È£¬±ØÐëÎª0.µÚÆß¸ö²ÎÊýformat ÏñËØÊý¾ÝµÄÑÕÉ«¸ñÊ½£¬±ØÐëºÍinternalformattÈ¡Öµ±ØÐëÏàÍ¬¡£
-			µÚ°Ë¸ö²ÎÊýtype Ö¸¶¨ÏñËØÊý¾ÝµÄÊý¾ÝÀàÐÍ¡£¿ÉÒÔÊ¹ÓÃµÄÖµÓÐGL_UNSIGNED_BYTE,GL_UNSIGNED_SHORT_5_6_5,GL_UNSIGNED_SHORT_4_4_4_4,GL_UNSIGNED_SHORT_5_5_5_1¡£
-			µÚ¾Å¸ö²ÎÊýpixels Ö¸¶¨ÄÚ´æÖÐÖ¸ÏòÍ¼ÏñÊý¾ÝµÄÖ¸Õë
-			ÔÚµ÷ÓÃ¸Ãº¯ÊýÖ®Ç°£¬±ØÐëµ÷ÓÃglBindTexture(GL_TEXTURE_2D, mTextureID );ÒÔÖ¸¶¨Òª²Ù×÷µÄÎÆÀíID
+			 æ ¹æ®æŒ‡å®šçš„å‚æ•°ï¼Œç”Ÿæˆä¸€ä¸ª2Dçº¹ç†(Texture)
+			 ç¬¬ä¸€ä¸ªå‚æ•°æŒ‡å®šç›®æ ‡çº¹ç†ï¼Œè¿™ä¸ªå€¼å¿…é¡»æ˜¯GL_TEXTURE_2D,ç¬¬äºŒä¸ªå‚æ•°levelæ‰§è¡Œç»†èŠ‚çº§åˆ«ï¼Œ0æ˜¯æœ€åŸºæœ¬çš„å›¾åƒçº§åˆ«,nè¡¨ç¤ºç¬¬Nçº§è´´å›¾ç»†åŒ–çº§åˆ«
+			 ç¬¬ä¸‰ä¸ªå‚æ•°internalformat æŒ‡å®šçº¹ç†ä¸­çš„é¢œè‰²ç»„ä»¶ï¼Œè¿™ä¸ªå–å€¼å’ŒåŽé¢çš„formatå–å€¼å¿…é¡»ç›¸åŒã€‚å¯é€‰çš„å€¼æœ‰GL_ALPHA,GL_RGB,GL_RGBA,GL_LUMINANCE, GL_LUMINANCE_ALPHA ç­‰å‡ ç§ã€‚
+			ç¬¬å››ä¸ªå‚æ•°width æŒ‡å®šçº¹ç†å›¾åƒçš„å®½åº¦ï¼Œç¬¬äº”ä¸ªå‚æ•°height æŒ‡å®šçº¹ç†å›¾åƒçš„é«˜åº¦ï¼Œç¬¬å…­ä¸ªå‚æ•°border æŒ‡å®šè¾¹æ¡†çš„å®½åº¦ï¼Œå¿…é¡»ä¸º0.ç¬¬ä¸ƒä¸ªå‚æ•°format åƒç´ æ•°æ®çš„é¢œè‰²æ ¼å¼ï¼Œå¿…é¡»å’Œinternalformattå–å€¼å¿…é¡»ç›¸åŒã€‚
+			ç¬¬å…«ä¸ªå‚æ•°type æŒ‡å®šåƒç´ æ•°æ®çš„æ•°æ®ç±»åž‹ã€‚å¯ä»¥ä½¿ç”¨çš„å€¼æœ‰GL_UNSIGNED_BYTE,GL_UNSIGNED_SHORT_5_6_5,GL_UNSIGNED_SHORT_4_4_4_4,GL_UNSIGNED_SHORT_5_5_5_1ã€‚
+			ç¬¬ä¹ä¸ªå‚æ•°pixels æŒ‡å®šå†…å­˜ä¸­æŒ‡å‘å›¾åƒæ•°æ®çš„æŒ‡é’ˆ
+			åœ¨è°ƒç”¨è¯¥å‡½æ•°ä¹‹å‰ï¼Œå¿…é¡»è°ƒç”¨glBindTexture(GL_TEXTURE_2D, mTextureID );ä»¥æŒ‡å®šè¦æ“ä½œçš„çº¹ç†ID
 			*/
 			glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, widthTexture, heightTexture, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer );
 
 			/*
-			 * Ìá¹©»æÖÆ¹¦ÄÜ¡£µ±²ÉÓÃ¶¥µãÊý×é·½Ê½»æÖÆÍ¼ÐÎÊ±£¬Ê¹ÓÃ¸Ãº¯Êý¡£¸Ãº¯Êý¸ù¾Ý¶¥µãÊý×éÖÐµÄ×ø±êÊý¾ÝºÍÖ¸¶¨µÄÄ£Ê½£¬½øÐÐ»æÖÆ¡£
-			       µ÷ÓÃ¸Ãº¯ÊýÖ®Ç°ÐèÒª£¬µ÷ÓÃglEnableVertexAttribArray¡¢glVertexAttribPointerµÈÉèÖÃ¶¥µãÊôÐÔºÍÊý¾Ý¡£
-			  mode£¬»æÖÆ·½Ê½£¬OpenGL2.0ÒÔºóÌá¹©ÒÔÏÂ²ÎÊý:GL_POINTS¡¢GL_LINES¡¢GL_LINE_LOOP¡¢GL_LINE_STRIP¡¢GL_TRIANGLES¡¢GL_TRIANGLE_STRIP¡¢GL_TRIANGLE_FAN¡£
-		      first£¬´ÓÊý×é»º´æÖÐµÄÄÄÒ»Î»¿ªÊ¼»æÖÆ£¬Ò»°ãÎª0¡£      count£¬Êý×éÖÐ¶¥µãµÄÊýÁ¿¡£
+			 * æä¾›ç»˜åˆ¶åŠŸèƒ½ã€‚å½“é‡‡ç”¨é¡¶ç‚¹æ•°ç»„æ–¹å¼ç»˜åˆ¶å›¾å½¢æ—¶ï¼Œä½¿ç”¨è¯¥å‡½æ•°ã€‚è¯¥å‡½æ•°æ ¹æ®é¡¶ç‚¹æ•°ç»„ä¸­çš„åæ ‡æ•°æ®å’ŒæŒ‡å®šçš„æ¨¡å¼ï¼Œè¿›è¡Œç»˜åˆ¶ã€‚
+			       è°ƒç”¨è¯¥å‡½æ•°ä¹‹å‰éœ€è¦ï¼Œè°ƒç”¨glEnableVertexAttribArrayã€glVertexAttribPointerç­‰è®¾ç½®é¡¶ç‚¹å±žæ€§å’Œæ•°æ®ã€‚
+			  modeï¼Œç»˜åˆ¶æ–¹å¼ï¼ŒOpenGL2.0ä»¥åŽæä¾›ä»¥ä¸‹å‚æ•°:GL_POINTSã€GL_LINESã€GL_LINE_LOOPã€GL_LINE_STRIPã€GL_TRIANGLESã€GL_TRIANGLE_STRIPã€GL_TRIANGLE_FANã€‚
+		      firstï¼Œä»Žæ•°ç»„ç¼“å­˜ä¸­çš„å“ªä¸€ä½å¼€å§‹ç»˜åˆ¶ï¼Œä¸€èˆ¬ä¸º0ã€‚      countï¼Œæ•°ç»„ä¸­é¡¶ç‚¹çš„æ•°é‡ã€‚
 			 */
-			glDrawArrays( GL_TRIANGLE_STRIP, 0, 4);//Ö»ÄÜ´«4£¬4¸ö¶¥µã
+			glDrawArrays( GL_TRIANGLE_STRIP, 0, 4);//åªèƒ½ä¼ 4ï¼Œ4ä¸ªé¡¶ç‚¹
 
 			glDisableVertexAttribArray( ATTRIBUTE_VERTEX );
 			glDisableVertexAttribArray( ATTRIBUTE_TEXCOORD );
-			glBindTexture( GL_TEXTURE_2D, 0 );//Õâ¾ä¿ÉÒÔÈ¥µô
+			glBindTexture( GL_TEXTURE_2D, 0 );//è¿™å¥å¯ä»¥åŽ»æŽ‰
 
 			//delete []rgbbuffer;
 		}
@@ -429,25 +429,25 @@ namespace KugouPlayer
 	{
 		int status = 0;
 
-		unsigned int shader = glCreateShader( type );//´´½¨×ÅÉ«Æ÷shader£¬Ä¿Ç°Ò»°ãÊÇÁ½¸ö×ÅÉ«Æ÷:¶¥µã×ÅÉ«Æ÷ºÍÆ¬¶Î×ÅÉ«Æ÷,·µ»Ø×ÅÉ«Æ÷±êÊ¶·û
+		unsigned int shader = glCreateShader( type );//åˆ›å»ºç€è‰²å™¨shaderï¼Œç›®å‰ä¸€èˆ¬æ˜¯ä¸¤ä¸ªç€è‰²å™¨:é¡¶ç‚¹ç€è‰²å™¨å’Œç‰‡æ®µç€è‰²å™¨,è¿”å›žç€è‰²å™¨æ ‡è¯†ç¬¦
 		if( ( shader == 0 ) || ( shader == GL_INVALID_ENUM ) )
 		{
 			return 0;
 		}
 
-		/*½«×ÅÉ«Æ÷ÓïÑÔÔ´´úÂë×Ö·ûÊý×é°ó¶¨µ½×ÅÉ«Æ÷¶ÔÏó£¬µÚ¶þ¸ö²ÎÊý±íÊ¾Ö¸¶¨×Ö·ûÖ¸ÕëÊý×éÖÐÔªËØµÄ¸öÊý£¬¼´¶àÉÙ¸ö×ÅÉ«Æ÷Ô´´úÂë.
-		 * µÚÈý¸ö²ÎÊýÎª×Ö·ûÖ¸ÕëÊý×éµØÖ·£¬µÚËÄ¸ö²ÎÊýÊÇ¸öÕûÊýÖ¸ÕëÊý×é£¬ºÍshader×Ö·ûÖ¸ÕëÊý×é¶ÔÓ¦£¬ËüÖ¸¶¨Ã¿¸öshaderÔ´´úÂëµÄ×Ö·û´®³¤¶È¡£
-		 * ÈôÖÃÎªNULL±íÊ¾Ô´´úÂë×Ö·û´®³¤¶ÈÊý×éµÄ¸öÊýÎª0¸ö
-		 *ÎªÁËÊ¹³ÌÐò¼òµ¥£¬ÔÚ±¾ÀýÖÐ£¬×Ö·ûÖ¸ÕëÊý×éÔªËØÖ»ÓÐÒ»¸ö£¬¼´Ö»ÓÐÒ»¸öshaderSourceÀ´·ÅÔ´´úÂë¡£
+		/*å°†ç€è‰²å™¨è¯­è¨€æºä»£ç å­—ç¬¦æ•°ç»„ç»‘å®šåˆ°ç€è‰²å™¨å¯¹è±¡ï¼Œç¬¬äºŒä¸ªå‚æ•°è¡¨ç¤ºæŒ‡å®šå­—ç¬¦æŒ‡é’ˆæ•°ç»„ä¸­å…ƒç´ çš„ä¸ªæ•°ï¼Œå³å¤šå°‘ä¸ªç€è‰²å™¨æºä»£ç .
+		 * ç¬¬ä¸‰ä¸ªå‚æ•°ä¸ºå­—ç¬¦æŒ‡é’ˆæ•°ç»„åœ°å€ï¼Œç¬¬å››ä¸ªå‚æ•°æ˜¯ä¸ªæ•´æ•°æŒ‡é’ˆæ•°ç»„ï¼Œå’Œshaderå­—ç¬¦æŒ‡é’ˆæ•°ç»„å¯¹åº”ï¼Œå®ƒæŒ‡å®šæ¯ä¸ªshaderæºä»£ç çš„å­—ç¬¦ä¸²é•¿åº¦ã€‚
+		 * è‹¥ç½®ä¸ºNULLè¡¨ç¤ºæºä»£ç å­—ç¬¦ä¸²é•¿åº¦æ•°ç»„çš„ä¸ªæ•°ä¸º0ä¸ª
+		 *ä¸ºäº†ä½¿ç¨‹åºç®€å•ï¼Œåœ¨æœ¬ä¾‹ä¸­ï¼Œå­—ç¬¦æŒ‡é’ˆæ•°ç»„å…ƒç´ åªæœ‰ä¸€ä¸ªï¼Œå³åªæœ‰ä¸€ä¸ªshaderSourceæ¥æ”¾æºä»£ç ã€‚
 		 */
 		glShaderSource( shader, 1, &shaderSource, NULL );
-		glCompileShader( shader );//±àÒë×ÅÉ«Æ÷ÓïÑÔ
+		glCompileShader( shader );//ç¼–è¯‘ç€è‰²å™¨è¯­è¨€
 
-		//ÓÃÓÚ»ñµÃ×ÅÉ«Æ÷ÓïÑÔ±àÒëµÄ×´Ì¬
+		//ç”¨äºŽèŽ·å¾—ç€è‰²å™¨è¯­è¨€ç¼–è¯‘çš„çŠ¶æ€
 		glGetShaderiv( shader, GL_COMPILE_STATUS, &status );
 		if( status == GL_FALSE )
 		{
-			glDeleteShader( shader );//É¾³ý×ÅÉ«Æ÷
+			glDeleteShader( shader );//åˆ é™¤ç€è‰²å™¨
 			return 0;
 		}
 
@@ -465,7 +465,7 @@ namespace KugouPlayer
 	}
 
 	/*
-	 * ¼ÓÔØ×ÅÉ«Æ÷
+	 * åŠ è½½ç€è‰²å™¨
 	 */
 	int OpenGLRender::_LoadShader()
 	{
@@ -473,10 +473,10 @@ namespace KugouPlayer
 
 		do
 		{
-			program = glCreateProgram();//ÉêÇëÒ»¸ö×ÅÉ«Æ÷³ÌÐò,·µ»Ø¸Ã×ÅÉ«Æ÷³ÌÐòµÄ±êÊ¶·û
+			program = glCreateProgram();//ç”³è¯·ä¸€ä¸ªç€è‰²å™¨ç¨‹åº,è¿”å›žè¯¥ç€è‰²å™¨ç¨‹åºçš„æ ‡è¯†ç¬¦
 
-			/*¼ÓÔØ¶ÔÓ¦µÄ×ÅÉ«Æ÷
-			 * ÐèÒª±àÒë¶ÔÓ¦µÄ×ÅÉ«Æ÷ÓïÑÔ
+			/*åŠ è½½å¯¹åº”çš„ç€è‰²å™¨
+			 * éœ€è¦ç¼–è¯‘å¯¹åº”çš„ç€è‰²å™¨è¯­è¨€
 			 */
 			vertexShader = _CompileShader( GL_VERTEX_SHADER, VERTEX_SHADER_STRING );
 			if( !vertexShader )
@@ -492,29 +492,29 @@ namespace KugouPlayer
 				break;
 			}
 
-			//½«±àÒëºÃµÄshader¸½¼Óµ½³ÌÐòÖÐ
+			//å°†ç¼–è¯‘å¥½çš„shaderé™„åŠ åˆ°ç¨‹åºä¸­
 			glAttachShader( program, vertexShader );
 			glAttachShader( program, fragmentShader );
 			/*
-			 *ÔÚÓ¦ÓÃ³ÌÐòÖÐ Ê¹ÓÃglBindAttribLocation°ó¶¨¶¥µã×ÅÉ«Æ÷ÓïÑÔÖÐµÄattribute±äÁ¿,ºóÃæÔÚäÖÈ¾Ê±»áÊ¹ÓÃº¯ÊýglVertexAttribPointer£¨£©
-			 *ÔÚÓ¦ÓÃ³ÌÐòÖÐ ÎªÃ¿¸öattribute±äÁ¿¸³Öµ
+			 *åœ¨åº”ç”¨ç¨‹åºä¸­ ä½¿ç”¨glBindAttribLocationç»‘å®šé¡¶ç‚¹ç€è‰²å™¨è¯­è¨€ä¸­çš„attributeå˜é‡,åŽé¢åœ¨æ¸²æŸ“æ—¶ä¼šä½¿ç”¨å‡½æ•°glVertexAttribPointerï¼ˆï¼‰
+			 *åœ¨åº”ç”¨ç¨‹åºä¸­ ä¸ºæ¯ä¸ªattributeå˜é‡èµ‹å€¼
 			 */
 			glBindAttribLocation( program, ATTRIBUTE_VERTEX, "position" );
 			glBindAttribLocation( program, ATTRIBUTE_TEXCOORD, "texcoord" );
 
-			//Á´½Ó³ÌÐò
+			//é“¾æŽ¥ç¨‹åº
 			glLinkProgram( program );
 
 			int status;
-			glGetProgramiv( program, GL_LINK_STATUS, &status );//»ñÈ¡³ÌÐòµÄÁ´½Ó×´Ì¬ÐÅÏ¢
+			glGetProgramiv( program, GL_LINK_STATUS, &status );//èŽ·å–ç¨‹åºçš„é“¾æŽ¥çŠ¶æ€ä¿¡æ¯
 			if( status == GL_FALSE )
 			{
 				err = -3;
 				break;
 			}
 
-			glValidateProgram( program );//¶Ô£¨×ÅÉ«£©³ÌÐò¶ÔÏó½øÐÐÕýÈ·ÐÔÑéÖ¤
-			glGetProgramiv( program, GL_VALIDATE_STATUS, &status );//»ñÈ¡³ÌÐòµÄÕýÈ·ÐÔÑéÖ¤×´Ì¬ÐÅÏ¢
+			glValidateProgram( program );//å¯¹ï¼ˆç€è‰²ï¼‰ç¨‹åºå¯¹è±¡è¿›è¡Œæ­£ç¡®æ€§éªŒè¯
+			glGetProgramiv( program, GL_VALIDATE_STATUS, &status );//èŽ·å–ç¨‹åºçš„æ­£ç¡®æ€§éªŒè¯çŠ¶æ€ä¿¡æ¯
 			if( status == GL_FALSE )
 			{
 				err = -4;
@@ -522,8 +522,8 @@ namespace KugouPlayer
 			}
 
 			/*
-			 * ÔÚÓ¦ÓÃ³ÌÐòÖÐ»ñµÃÆ¬¶Î×ÅÉ«Æ÷ÖÐµÄUniformÀàÐÍ±äÁ¿µÄÎ»ÖÃ,Ïàµ±ÓÚÊÇÔÚÓ¦ÓÃ³ÌÐòÖÐÊ¹ÓÃ±äÁ¿°ó¶¨ÁËÆ¬¶Î×ÅÉ«Æ÷ÖÐµÄUniformÀàÐÍ±äÁ¿£¬
-			 * ºóÃæÔÚÊµ¼ÊäÖÈ¾Ê±»áÔÚÓ¦ÓÃ³ÌÐòÖÐ¶ÔÆä¸³Öµ
+			 * åœ¨åº”ç”¨ç¨‹åºä¸­èŽ·å¾—ç‰‡æ®µç€è‰²å™¨ä¸­çš„Uniformç±»åž‹å˜é‡çš„ä½ç½®,ç›¸å½“äºŽæ˜¯åœ¨åº”ç”¨ç¨‹åºä¸­ä½¿ç”¨å˜é‡ç»‘å®šäº†ç‰‡æ®µç€è‰²å™¨ä¸­çš„Uniformç±»åž‹å˜é‡ï¼Œ
+			 * åŽé¢åœ¨å®žé™…æ¸²æŸ“æ—¶ä¼šåœ¨åº”ç”¨ç¨‹åºä¸­å¯¹å…¶èµ‹å€¼
 			 */
 			texture = glGetUniformLocation( program, "s_texture" );
 			texturesize = glGetUniformLocation( program, "TexSize" );
@@ -535,19 +535,19 @@ namespace KugouPlayer
 		{
 			if( vertexShader )
 			{
-				glDeleteShader( vertexShader );//É¾³ý¶¥µã×ÅÉ«Æ÷
+				glDeleteShader( vertexShader );//åˆ é™¤é¡¶ç‚¹ç€è‰²å™¨
 				vertexShader = 0;
 			}
 
 			if( fragmentShader )
 			{
-				glDeleteShader( fragmentShader );//É¾³ýÆ¬¶Î×ÅÉ«Æ÷
+				glDeleteShader( fragmentShader );//åˆ é™¤ç‰‡æ®µç€è‰²å™¨
 				fragmentShader = 0;
 			}
 
 			if( program )
 			{
-				glDeleteProgram(program);//É¾³ý³ÌÐò
+				glDeleteProgram(program);//åˆ é™¤ç¨‹åº
 				program = 0;
 			}
 		}
@@ -559,19 +559,19 @@ namespace KugouPlayer
 	{
 		if( vertexShader )
 		{
-			glDeleteShader( vertexShader );//É¾³ý¶¥µã×ÅÉ«Æ÷
+			glDeleteShader( vertexShader );//åˆ é™¤é¡¶ç‚¹ç€è‰²å™¨
 			vertexShader = 0;
 		}
 
 		if( fragmentShader )
 		{
-			glDeleteShader( fragmentShader );//É¾³ýÆ¬¶Î×ÅÉ«Æ÷
+			glDeleteShader( fragmentShader );//åˆ é™¤ç‰‡æ®µç€è‰²å™¨
 			fragmentShader = 0;
 		}
 
 		if( program )
 		{
-			glDeleteProgram(program);//É¾³ý³ÌÐò
+			glDeleteProgram(program);//åˆ é™¤ç¨‹åº
 			program = 0;
 		}
 	}

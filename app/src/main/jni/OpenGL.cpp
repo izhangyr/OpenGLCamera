@@ -6,7 +6,7 @@
 
 namespace KugouPlayer
 {
-//OpenGL���еĹ��캯���г�ʼ�����Ա����
+//OpenGL类中的构造函数中初始化其成员变量
 	OpenGL::OpenGL()
 		: mOpenGLRender( NULL ),
 		  mWriter( NULL ),
@@ -19,9 +19,9 @@ namespace KugouPlayer
 		  //filePath(NULL),
 		  //file(NULL)
 	{
-		pthread_mutex_init( &mutex, NULL );//��ʼ���߳���
+		pthread_mutex_init( &mutex, NULL );//初始化线程锁
 
-		mOpenGLRender = new OpenGLRender();//ΪOpenGLRender�����һ�鶯̬���ڴ�
+		mOpenGLRender = new OpenGLRender();//为OpenGLRender类分配一块动态的内存
 
 	//	avcodec_init();
 	//	av_register_all();
@@ -52,7 +52,7 @@ namespace KugouPlayer
 		}
 	}
 	/*
-	 * �л��������
+	 * 切换摄像界面
 	 */
 	void OpenGL::surfaceChange( int width, int height )
 	{
@@ -63,11 +63,11 @@ namespace KugouPlayer
 	}
 
 	/*
-	 *�ı��˾�����,�������Ƿ�ʹ�ø�˹�˲�
+	 *改变滤镜类型,包括有是否使用高斯滤波
 	 */
 	void OpenGL::setFilterType( int type, bool enablegaussfilter )
 	{
-		mImageFilter.SetFilterType( type );//�����˾�����
+		mImageFilter.SetFilterType( type );//设置滤镜类型
 
 		if( mOpenGLRender != NULL )
 		{
@@ -164,8 +164,8 @@ namespace KugouPlayer
 		{
 			// change yuv to rgb
 			/*
-			 * ������Ⱦ��ʾ��ͼ��ߴ��֮ǰ��Ҫ��,����Ҫ���·���һ��ͼ��ߴ��С��buffer.
-			 * ����ֱ��ʹ��֮ǰ��ͼ��buffer.
+			 * 若新渲染显示的图像尺寸比之前的要大,则需要重新分配一个图像尺寸大小的buffer.
+			 * 否则直接使用之前的图像buffer.
 			 */
 			//if( ( widthTexture * heightTexture ) > ( mImageWidth * mImageHeight ) )
 			if ((widthTexture > 0) && (heightTexture > 0) && (widthTexture != mImageWidth) && (heightTexture != mImageHeight))
@@ -207,7 +207,7 @@ namespace KugouPlayer
 
 			//memset(mBGRBuf, 0, imageSize);
 			//memset(YUV420Buf, 0, mImageWidth*mImageHeight*3/2);
-			//���ⲿ��������YUV����ת��ΪRGB,�������mRGBBuffer��
+			//将外部传进来的YUV数据转换为RGB,并存放在mRGBBuffer中
 			if( mRGBBuffer != NULL )
 			{
 				//ColorSpace::modify_yuv420splum(buffer, mImageWidth, mImageHeight, 100);
@@ -224,23 +224,23 @@ namespace KugouPlayer
 				//end = clock();
 				//LOGE("the time differ:%d\r\n", (end-start));
 
-				// color process  ��֮ǰѡ����˾����Ͳ�����������ֵ�������˾����ݷ���mRGBBuffer��
+				// color process  将之前选择的滤镜类型并经过像素数值计算后的滤镜数据放在mRGBBuffer中
 				mImageFilter.Process( mRGBBuffer, widthTexture, heightTexture );
 			}
 
 			pthread_mutex_lock( &mutex );
 			if( mWriter != NULL )
 			{
-				len = mWriter->writeVideo( buffer );//�Դ�������YUV���ݿ�ʼ����h264���벢д�ļ�
+				len = mWriter->writeVideo( buffer );//对传进来的YUV数据开始进行h264编码并写文件
 				//lenArray.push(len);
 			}
 			pthread_mutex_unlock( &mutex );
 		}
 
-		// shader process ��ʽ������Ⱦ����
+		// shader process 正式进行渲染操作
 		/*
-		 *���ⲿû���µ�ͼ��YUV���ݴ���������֮ǰת���õ�RGBbuffer������,��Ҳ����Ҫ��Ⱦ��ʾ�ġ�
-		 ��Ȼ���µ�YUVͼ�����ݴ�������,���������ǽ���ת��ΪBGRA���ݺ�,Ȼ��������������Ⱦ��ʾ
+		 *若外部没有新的图像YUV数据传进来，而之前转换好的RGBbuffer还存在,则也是需要渲染显示的。
+		 当然有新的YUV图像数据传进来后,首先上面是将其转换为BGRA数据后,然后才在下面进行渲染显示
 		 */
 		if( ( mRGBBuffer != NULL ) && ( mOpenGLRender != NULL ) )
 		{
@@ -288,10 +288,7 @@ namespace KugouPlayer
 		{
 			int v = lenArray.front();
 			lenArray.pop();
-
-
 		}
-
 
 		fclose(file);
 		pthread_mutex_unlock( &mutex );

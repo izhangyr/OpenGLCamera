@@ -9,9 +9,9 @@ using namespace KugouPlayer;
 struct fields_t
 {
 	jclass clazz;
-
 	jfieldID context;
 };
+
 static struct fields_t fields;
 
 static const char* const kClassPathName = "com/kugou/openglcamera/OpenGLNative";
@@ -141,13 +141,13 @@ static void opengl_native_stopRecord( JNIEnv* env, jobject obj )
 static JNINativeMethod gMethods[] =
 {
 	{ "native_init",             "()V",                        ( void* )opengl_native_native_init },
-    { "init",                    "()V",                        ( void* )opengl_native_init },
-	{ "surfaceChange",           "(II)V",                      ( void* )opengl_native_surfaceChange },
-	{ "setRotation",             "(III)V",                     ( void* )opengl_native_setRotation },
-    { "changeFilterType",        "(II)V",                      ( void* )opengl_native_changeFilterType },
-	{ "render",                  "([BII)V",                    ( void* )opengl_native_render },
-	{ "startRecord",             "(Ljava/lang/String;II)V",    ( void* )opengl_native_startRecord },
-	{ "stopRecord",              "()V",                        ( void* )opengl_native_stopRecord },
+    { "init",                         "()V",                        ( void* )opengl_native_init },
+	{ "surfaceChange",      "(II)V",                      ( void* )opengl_native_surfaceChange },
+	{ "setRotation",           "(III)V",                     ( void* )opengl_native_setRotation },
+    { "changeFilterType",  "(II)V",                      ( void* )opengl_native_changeFilterType },
+	{ "render",                   "([BII)V",                    ( void* )opengl_native_render },
+	{ "startRecord",           "(Ljava/lang/String;II)V",    ( void* )opengl_native_startRecord },
+	{ "stopRecord",           "()V",                        ( void* )opengl_native_stopRecord },
 };
 
 //锟较诧拷锟斤拷氐锟斤拷锟节猴拷锟斤拷

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/jni/Bitmap.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/jni/OpenGL.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/jni/OpenGL.h" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/jni/OpenGLNative.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/jni/OpenGLRender.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/jni/OpenGLRender.h" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
