@@ -5,6 +5,7 @@
 #ifndef _E_GLFRAMEBUFFERCACHE_H_
 #define _E_GLFRAMEBUFFERCACHE_H_
 #include <map>
+#include "GLFramebuffer.h"
 
 namespace e{
 

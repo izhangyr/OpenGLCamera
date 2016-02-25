@@ -20,18 +20,25 @@ namespace e{
 
     GLContext::~GLContext(void)
     {
+        std::map<size_t, GLProgram*>::iterator it = _shaderProgramCache.begin();
+        for(; it!=_shaderProgramCache.end(); it++)
+        {
+            if (it->second)
+                delete (it->second);
+        }
         if (_frameBufferCache)
         {
             delete _frameBufferCache;
             _frameBufferCache;
         }
 
-        if (_eglContext != EGL_NO_CONTEXT){
-            Release();
+        if (_eglContext != EGL_NO_CONTEXT)
+        {
+            ReleaseContext();
         }
     }
 
-    bool GLContext::Initialize(void)
+    bool GLContext::CreateContext(void)
     {
         LOGD("EGL Step 1: Get default display.");
         if ((_eglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY) == EGL_NO_DISPLAY){
@@ -103,7 +110,7 @@ namespace e{
         return true;
     }
 
-    void GLContext::Release(void)
+    void GLContext::ReleaseContext(void)
     {
         eglMakeCurrent(_eglDisplay, EGL_NO_SURFACE , EGL_NO_SURFACE , EGL_NO_CONTEXT);
         eglDestroySurface(_eglDisplay, _eglSurface);
@@ -131,8 +138,9 @@ namespace e{
 
     void GLContext::UseAsCurrentContext(void)
     {
-        if (_eglContext == EGL_NO_CONTEXT){
-             bool ret = Initialize();
+        if (_eglContext == EGL_NO_CONTEXT)
+        {
+             bool ret = CreateContext();
              assert(ret);
         }
         assert(_eglContext != EGL_NO_CONTEXT);
@@ -152,9 +160,9 @@ namespace e{
         SetActiveShaderProgram(shaderProgram);
     }
 
-    GLProgram* GLContext::ProgramFromCache(const char* vertexShaderString, const char* fragmentShaderString)
+    GLProgram* GLContext::GetProgram(const char* vertexShaderString, const char* fragmentShaderString)
     {
-        std::hash<string> hashGenerator;
+        std::hash<string> h;
         std::string text = vertexShaderString;
         text.append(fragmentShaderString);
         size_t key = h(text);

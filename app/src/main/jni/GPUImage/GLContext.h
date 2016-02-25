@@ -5,10 +5,13 @@
 #ifndef _E_GLCONTEXT_H_
 #define _E_GLCONTEXT_H_
 
+
+#include <ES2/gl.h>
 #include <EGL/egl.h>
-#include <EGL/gl.h>
+#include <ES2/glext.h>
 #include <map>
 #include "GLBase.h"
+#include "GLProgram.h"
 #include "GLFramebufferCache.h"
 
 namespace e{
@@ -32,9 +35,9 @@ namespace e{
     public:
         GLContext(void);
         virtual ~GLContext(void);
-
-        bool Initialize(void);
-        void Release(void);
+        //@init & release
+        bool CreateContext(void);
+        void ReleaseContext(void);
 
         static GLContext* SharedImageProcessingContext(void);
         static void UseImageProcessingContext(void);
@@ -43,16 +46,16 @@ namespace e{
 
         void UserAsCurrentContext(void);
         void SetContextShaderProgram(GLProgram*shaderProgram);
-        GLProgram* ProgramFromCache(const char* vertexShaderString, const char* fragmentShaderString);
+        GLProgram* GetProgram(const char* vertexShaderString, const char* fragmentShaderString);
         GLFramebufferCache* SharedFramebufferCache(void);
     private:
         EGLDisplay* _eglDisplay;
         EGLSurface* _eglSurface;
         EGLContext* _eglContext;
-
+        //@program & cache
         GLProgram* _currentShaderProgram;
         std::map<size_t, GLProgram*> _shaderProgramCache;
-
+        //@framebuffer cache
         GLFramebufferCache* _frameBufferCache;
     };
 
@@ -74,4 +77,4 @@ namespace e{
 
 }
 
-#endif //OPENGLCAMERA_GLCONTEXT_H
+#endif //_E_GLCONTEXT_H

@@ -3,13 +3,14 @@
 //
 
 #include "GLTwoPassFilter.h"
+#include <assert.h>
 
 namespace e {
 
     GLTwoPassFilter::GLTwoPassFilter(void)
     {
-        _secondOutputFramebuffer = 0;
         _secondFilterProgram = 0;
+        _secondOutputFramebuffer = 0;
         _secondFilterPositionAttribute = 0;
         _secondFilterTextureCoordinateAttribute = 0;
         _secondFilterInputTextureUniform = 0;
@@ -29,8 +30,8 @@ namespace e {
         bool ret = GLShaderFilter::Initialize(firstStateVertexShaderString, firstStageFragmentShaderString);
         if (!ret) return false;
 
-        GLContext* context = GLContext::UseImageProcessingContext();
-        _secondFilterProgram = context->Program(secondStageVertexShaderString, secondStageFragmentShaderString);
+        GLContext* context = GLContext::SharedImageProcessingContext();
+        _secondFilterProgram = context->GetProgram(secondStageVertexShaderString, secondStageFragmentShaderString);
         if (!_secondFilterProgram->Initialized())
         {
             InitializeSecondaryAttributes();

@@ -15,7 +15,14 @@ GLFramebufferCache::GLFramebufferCache(void)
 
 GLFramebufferCache::~GLFramebufferCache(void)
 {
-
+    std::map<size_t, GLFramebuffer*>::iterator it = _frameBufferCache.begin();
+    for (;it != _frameBufferCache.end(); it++)
+    {
+        if (it->second)
+        {
+            delete (it->second);
+        }
+    }
 }
 
 GLFramebuffer* GLFramebufferCache::FetchFramebuffer(Size size, bool onlyTexture)
@@ -91,7 +98,7 @@ size_t GLFramebufferCache::Hash(Size size, GLTextureOptions& textureOptions, boo
     }
 
     std::hash(string) h;
-    return h(text);
+    return h(key);
 }
 
 }

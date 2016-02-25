@@ -25,7 +25,7 @@ namespace
             _attributeCount = 0;
             _initialized = false;
             //init with shader string
-            bool ret = InitializeWithString(vertexShader, fragmentShader);
+            bool ret = Initialize(vertexShader, fragmentShader);
             assert(ret);
         }
 
@@ -36,7 +36,7 @@ namespace
             if (_program) glDeleteProgram(_program);
         }
 
-        bool GLProgram::InitializeWithString(const char* vertexShader, const char* fragmentShader)
+        bool GLProgram::Initialize(const char* vertexShader, const char* fragmentShader)
         {
             _initialized = false;
             _program = glCreateProgram();
@@ -53,11 +53,6 @@ namespace
             glAttachShader(_program, _vertexShader);
             glAttachShader(_program, _framentShader);
             return true;
-        }
-
-        bool GLProgram::InitializeWithFilename(const char* vertexShader, const char* fragmentShader)
-        {
-            return false;
         }
 
         bool GLProgram::CompileShader(GLuint* shader, GLenum type, const char* shaderString)
@@ -91,7 +86,7 @@ namespace
                 }
            }
 
-           return status == GL_TRUE;
+           return (status == GL_TRUE);
         }
 
         bool GLProgram::Link(void)

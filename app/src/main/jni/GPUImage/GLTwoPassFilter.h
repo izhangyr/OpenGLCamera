@@ -10,18 +10,22 @@ namespace e {
 class GLTwoPassFilter
     : public GLShaderFilter{
 public:
+    //@initialize
     bool Initialize(const char* firstStageVertexShaderString
         , const char* firstStageFragmentShaderString
         , const char* secondStageVertexShaderString
         , const char* secondStageFragmentShaderString);
-    bool Initialize(const char* firstStageFragmentShaderString,  const char* secondStageFragmentShaderString);
+
+    bool Initialize(const char* firstStageFragmentShaderString
+        ,const char* secondStageFragmentShaderString);
+
     void InitializeSecondaryAttributes(void);
     GLFramebuffer* FramebufferForOutput(void);
     void RemoveOutputFramebuffer(void);
     virtual void SetUniforms(int programIndex);
 protected:
-    GLFramebuffer* _secondOutputFramebuffer;
     GLProgram* _secondFilterProgram;
+    GLFramebuffer* _secondOutputFramebuffer;
     GLint _secondFilterPositionAttribute;
     GLint _secondFilterTextureCoordinateAttribute;
     GLint _secondFilterInputTextureUniform;
