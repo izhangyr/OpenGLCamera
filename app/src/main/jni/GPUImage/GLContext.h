@@ -7,8 +7,9 @@
 
 #include <EGL/egl.h>
 #include <EGL/gl.h>
-#include "GLBase.h"
 #include <map>
+#include "GLBase.h"
+#include "GLFramebufferCache.h"
 
 namespace e{
 
@@ -43,7 +44,7 @@ namespace e{
         void UserAsCurrentContext(void);
         void SetContextShaderProgram(GLProgram*shaderProgram);
         GLProgram* ProgramFromCache(const char* vertexShaderString, const char* fragmentShaderString);
-
+        GLFramebufferCache* SharedFramebufferCache(void);
     private:
         EGLDisplay* _eglDisplay;
         EGLSurface* _eglSurface;
@@ -51,6 +52,8 @@ namespace e{
 
         GLProgram* _currentShaderProgram;
         std::map<size_t, GLProgram*> _shaderProgramCache;
+
+        GLFramebufferCache* _frameBufferCache;
     };
 
     class GLInput

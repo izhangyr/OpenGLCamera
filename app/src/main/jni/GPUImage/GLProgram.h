@@ -44,7 +44,7 @@ namespace e
 
         GLuint _attributeCount;
         std::map<string, GLuint> _attributes;
-        std::map<string, GLuint> _uniforms;
+        //std::map<string, GLuint> _uniforms;
 
         bool _initialized;
     };

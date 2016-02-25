@@ -14,10 +14,18 @@ namespace e{
         _eglSurface = EGL_NO_SURFACE;
         _eglDisplay = EGL_NO_DISPLAY;
         _currentShaderProgram = 0;
+        _frameBufferCache = new GLFramebufferCache();
+        assert(_frameBufferCache);
     }
 
     GLContext::~GLContext(void)
     {
+        if (_frameBufferCache)
+        {
+            delete _frameBufferCache;
+            _frameBufferCache;
+        }
+
         if (_eglContext != EGL_NO_CONTEXT){
             Release();
         }
@@ -165,6 +173,11 @@ namespace e{
         }
 
         return program;
+    }
+
+    GLFramebufferCache* GLContext::SharedFramebufferCache(void)
+    {
+        return _frameBufferCache;
     }
 
 }

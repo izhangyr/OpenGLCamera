@@ -30,6 +30,8 @@ public:
     void ForceProcessingAtSize(Size frameSize);
     void ForceProcessingAtSizeRespectingAspectRatio(Size frameSize);
 
+    bool ProvidesMonochromeOutput(void);
+
 protected:
     GLFramebuffer* _outputFramebuffer;
     Size _inputTextureSize;

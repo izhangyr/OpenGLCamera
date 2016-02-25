@@ -167,4 +167,9 @@ namespace e{
     {
         return _enable;
     }
+
+    bool GLOutput::ProvidesMonochromeOutput(void)
+    {
+        return false;
+    }
 }
