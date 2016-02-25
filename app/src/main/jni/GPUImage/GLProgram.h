@@ -17,6 +17,7 @@ namespace e
         GLProgram(void);
         GLProgram(const char* vertexShader, const char* fragmentShader);
         virtual ~GLProgram(void);
+
         bool InitializeWithString(const char* vertexShader, const char* fragmentShader);
         bool InitializeWithFilename(const char* vertexShader, const char* fragmentShader);
         void AddAttribute(const char* attrName);
@@ -25,6 +26,11 @@ namespace e
         bool Link(void);
         void Use(void);
         void Validate(void);
+
+        bool Initialized(void) const;
+        string ProgramLog(void) const;
+        string VertexShaderLog(void) const;
+        string FragmentShaderLog(void) const;
     private:
         bool CompileShader(GLuint* shader, GLenum type, const char* shaderString);
     private:
@@ -37,8 +43,8 @@ namespace e
         string _fragmentShaderLog;
 
         GLuint _attributeCount;
-        map<string, GLuint> _attributes;
-        vector<string, GLuint> _uniforms;
+        std::map<string, GLuint> _attributes;
+        std::map<string, GLuint> _uniforms;
 
         bool _initialized;
     };

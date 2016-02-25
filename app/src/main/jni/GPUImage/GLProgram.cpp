@@ -137,7 +137,7 @@ namespace
 
         void GLProgram::AddAttribute(const char* attrName)
         {
-            map<string, GLuint>::iterator it = _attributes.find(attrName);
+            std::map<string, GLuint>::iterator it = _attributes.find(string(attrName));
             if (it == _attributes.end())
             {
                 GLuint index = _attributeCount++;
@@ -148,7 +148,7 @@ namespace
 
         GLuint GLProgram::AttributeIndex(const char* attrName)
         {
-            map<string, GLuint>::iterator it = _attributes.find(attrName);
+            std::map<string, GLuint>::iterator it = _attributes.find(string(attrName));
             if (it != _attributes.end())
             {
                 return it->second;
@@ -162,5 +162,25 @@ namespace
         GLuint GLProgram::UniformIndex(const char* attrName)
         {
             return glGetUniformLocation(_program, attrName);
+        }
+
+        bool GLProgram::Initialized(void) const
+        {
+            return _initialized;
+        }
+
+        string GLProgram::ProgramLog(void) const
+        {
+            return _programLog;
+        }
+
+        string GLProgram::VertexShaderLog(void) const
+        {
+            return _vertexShaderLog;
+        }
+
+        string GLProgram::FragmentShaderLog(void) const
+        {
+            return _fragmentShaderLog;
         }
 }
