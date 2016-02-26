@@ -16,7 +16,7 @@
 
 namespace e{
 
-#define GPUImageRotationSwapsWidthAndHeight(rotation) \
+#define GLRotationSwapsWidthAndHeight(rotation) \
     ((rotation) == kGPUImageRotateLeft || (rotation) == kGPUImageRotateRight \
     || (rotation) == kGPUImageRotateRightFlipVertical || (rotation) == kGPUImageRotateRightFlipHorizontal)
 

@@ -12,6 +12,17 @@ class GLTwoPassTextureSamplingFilter
 public:
     GLTwoPassTextureSamplingFilter(void);
     virtual ~GLTwoPassTextureSamplingFilter(void);
+    //@initialize
+    virtual bool Initialize(const char* firstStageVertexShaderString
+        , const char* firstStageFragmentShaderString
+        , const char* secondStageVertexShaderString
+        , const char* secondStageFragmentShaderString);
+
+    virtual void SetUniforms(int programIndex);
+    virtual void SetupFilter(Size size);
+
+    void SetVerticalTexelSpacing(GLfloat value);
+    void SetHorizontalTexelSpacing(GLfloat value);
 protected:
     GLint _verticalPassTexelWidthOffsetUniform;
     GLint _verticalPassTexelHeightOffsetUniform;

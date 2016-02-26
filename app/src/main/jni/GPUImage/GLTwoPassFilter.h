@@ -11,12 +11,12 @@ class GLTwoPassFilter
     : public GLShaderFilter{
 public:
     //@initialize
-    bool Initialize(const char* firstStageVertexShaderString
+    virtual bool Initialize(const char* firstStageVertexShaderString
         , const char* firstStageFragmentShaderString
         , const char* secondStageVertexShaderString
         , const char* secondStageFragmentShaderString);
 
-    bool Initialize(const char* firstStageFragmentShaderString
+    virtual bool Initialize(const char* firstStageFragmentShaderString
         ,const char* secondStageFragmentShaderString);
 
     void InitializeSecondaryAttributes(void);
